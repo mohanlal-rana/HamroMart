@@ -16,9 +16,21 @@ const errorMiddleware = require("./middleware/errorMiddleware");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const allowedOrigins = [
+  "https://hamromart.netlify.app",
+  "http://localhost:5173"
+];
 
 const corsOptions = {
-  origin: `https://hamromart.netlify.app || http://localhost:5173`,
+  origin: function (origin, callback) {
+    // allow requests with no origin (like Postman)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   methods: "GET,POST,PUT,DELETE,PATCH,HEAD",
   credentials: true,
 };
