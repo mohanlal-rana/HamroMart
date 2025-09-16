@@ -18,7 +18,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 const corsOptions = {
-  origin: "*",
+  origin: "https://hamromart.netlify.app",
   methods: "GET,POST,PUT,DELETE,PATCH,HEAD",
   credentials: true,
 };
