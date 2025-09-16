@@ -15,7 +15,9 @@ export default function Cart() {
   const navigate = useNavigate();
 
   const user = useSelector((state) => state.auth.user); // check login
-  const { items, totalPrice, loading, error } = useSelector((state) => state.cart);
+  const { items, totalPrice, loading, error } = useSelector(
+    (state) => state.cart
+  );
   const shippingAddress = useSelector((state) => state.shipping.address);
 
   // Redirect if user is not logged in
@@ -27,15 +29,17 @@ export default function Cart() {
     dispatch(fetchCart());
     dispatch(fetchShippingAddress());
   }, [dispatch, navigate, user]);
-if(!user){
-  navigate("/login")
-  return;
-}
+  if (!user) {
+    navigate("/login");
+    return;
+  }
   if (loading)
     return <p className="text-center mt-10 text-gray-500">Loading cart...</p>;
   if (error) return <p className="text-center mt-10 text-red-500">{error}</p>;
   if (items.length === 0)
-    return <p className="text-center mt-10 text-gray-500">Your cart is empty.</p>;
+    return (
+      <p className="text-center mt-10 text-gray-500">Your cart is empty.</p>
+    );
 
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
   const deliveryFee = 140;
@@ -88,7 +92,9 @@ if(!user){
                 <img
                   src={
                     product.images?.[0]?.url
-                      ? `${import.meta.env.VITE_API_URL}${product.images[0].url}`
+                      ? `${import.meta.env.VITE_API_URL}${
+                          product.images[0].url
+                        }`
                       : "https://via.placeholder.com/80"
                   }
                   alt={product.name}
@@ -113,7 +119,12 @@ if(!user){
             <div className="flex items-center justify-center gap-2">
               <button
                 onClick={() =>
-                  dispatch(updateQuantity({ productId: product._id, action: "decrement" }))
+                  dispatch(
+                    updateQuantity({
+                      productId: product._id,
+                      action: "decrement",
+                    })
+                  )
                 }
                 className="px-2 py-1 border rounded-md disabled:opacity-50"
                 disabled={quantity === 1}
@@ -123,7 +134,12 @@ if(!user){
               <span>{quantity}</span>
               <button
                 onClick={() =>
-                  dispatch(updateQuantity({ productId: product._id, action: "increment" }))
+                  dispatch(
+                    updateQuantity({
+                      productId: product._id,
+                      action: "increment",
+                    })
+                  )
                 }
                 className="px-2 py-1 border rounded-md"
               >
@@ -157,13 +173,13 @@ if(!user){
           <span>Rs. {deliveryFee}</span>
         </div>
 
-        <div className="flex gap-2 mb-4">
+        <div className="flex flex-col sm:flex-row gap-2 mb-4">
           <input
             type="text"
             placeholder="Enter Voucher Code"
-            className="flex-1 border rounded px-2 py-1"
+            className="flex-1 border rounded px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <button className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700">
+          <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm">
             APPLY
           </button>
         </div>
