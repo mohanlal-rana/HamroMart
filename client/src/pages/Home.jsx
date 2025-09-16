@@ -97,7 +97,7 @@ export default function Home() {
   {loading && <p className="text-center text-gray-500">Loading...</p>}
   {error && <p className="text-center text-red-500">{error}</p>}
 
-<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-6 justify-items-center">
+<div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4 justify-items-center">
   {products.map((product) => (
     <ProductCard
       key={product._id}
@@ -106,6 +106,7 @@ export default function Home() {
     />
   ))}
 </div>
+
 </div>
 
 
