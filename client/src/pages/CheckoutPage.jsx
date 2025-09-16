@@ -157,18 +157,18 @@ const handlePlaceOrder = async () => {
           ))}
 
           {/* Voucher */}
-          <div className="flex gap-2 mt-4">
-            <input
-              type="text"
-              placeholder="Enter Store/Daraz Code"
-              value={voucherCode}
-              onChange={(e) => setVoucherCode(e.target.value)}
-              className="flex-1 border rounded px-2 py-1"
-            />
-            <button className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700">
-              APPLY
-            </button>
-          </div>
+<div className="flex flex-col sm:flex-row gap-2 mt-4">
+  <input
+    type="text"
+    placeholder="Enter Store/Daraz Code"
+    value={voucherCode}
+    onChange={(e) => setVoucherCode(e.target.value)}
+    className="flex-1 border rounded px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+  />
+  <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm">
+    APPLY
+  </button>
+</div>
         </div>
       </div>
 

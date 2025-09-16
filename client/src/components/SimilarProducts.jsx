@@ -12,29 +12,22 @@ export default function SimilarProducts({ category, currentProductId }) {
   );
 
   useEffect(() => {
-    if (category) {
-      dispatch(fetchProductsByCategory(category));
-    }
+    if (category) dispatch(fetchProductsByCategory(category));
   }, [category, dispatch]);
 
-  // Filter out the current product
   const filteredProducts = categoryProducts.filter(
     (p) => p._id !== currentProductId
   );
-  //handle add to cart
+
   const handleAddToCart = (product) => {
-    dispatch(addToCart(product._id))
-      .unwrap() // unwrap asyncThunk to catch errors
+    dispatch(addToCart({ productId: product._id, quantity: 1 }))
+      .unwrap()
       .then(() => alert(`${product.name} added to cart!`))
       .catch((err) => alert(`Failed to add: ${err}`));
   };
 
   if (loadingCategory)
-    return (
-      <p className="mt-6 text-center text-gray-500">
-        Loading similar products...
-      </p>
-    );
+    return <p className="mt-6 text-center text-gray-500">Loading similar products...</p>;
   if (errorCategory)
     return <p className="mt-6 text-center text-red-500">{errorCategory}</p>;
   if (!filteredProducts.length) return null;
@@ -42,11 +35,13 @@ export default function SimilarProducts({ category, currentProductId }) {
   return (
     <div className="mt-10">
       <h2 className="text-2xl font-semibold mb-4">Similar Products</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+      {/* Mobile: horizontal scroll */}
+      <div className="flex gap-4 overflow-x-auto md:grid md:grid-cols-3 lg:grid-cols-4">
         {filteredProducts.map((prod) => (
           <div
             key={prod._id}
-            className="border rounded-lg shadow hover:shadow-lg transition overflow-hidden bg-white flex flex-col"
+            className="flex-shrink-0 w-1/2 sm:w-1/2 md:w-auto border rounded-lg shadow hover:shadow-lg transition overflow-hidden bg-white flex flex-col"
           >
             <Link to={`/product/${prod._id}`} className="flex-1">
               <img
@@ -54,17 +49,18 @@ export default function SimilarProducts({ category, currentProductId }) {
                 alt={prod.name}
                 className="w-full h-48 object-cover"
               />
-              <div className="p-4">
-                <h3 className="font-medium text-gray-800">{prod.name}</h3>
-                <p className="text-red-600 font-semibold mt-1">
+              <div className="p-3">
+                <h3 className="font-medium text-gray-800 text-sm sm:text-base truncate">
+                  {prod.name}
+                </h3>
+                <p className="text-red-600 font-semibold mt-1 text-sm sm:text-base">
                   Rs. {prod.price}
                 </p>
               </div>
             </Link>
-
             <button
               onClick={() => handleAddToCart(prod)}
-              className="flex items-center justify-center gap-2 w-full py-2 bg-blue-600 text-white hover:bg-blue-700 transition font-medium"
+              className="flex items-center justify-center gap-2 w-full py-2 bg-blue-600 text-white hover:bg-blue-700 transition font-medium text-sm"
             >
               <FiShoppingCart className="text-lg" /> Add to Cart
             </button>

@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
@@ -9,12 +11,10 @@ import VendorLayout from "./components/layouts/VendorLayout";
 import VendorOrders from "./pages/vendor/VendorOrders";
 import VendorProducts from "./pages/vendor/VendorProducts";
 import AddProduct from "./pages/vendor/AddProduct";
-import NotFound from "./pages/NotFound";
 import EditProduct from "./pages/vendor/EditProduct";
 import Wishlist from "./pages/wishlist";
 import Cart from "./pages/Cart";
 import ProductDetail from "./pages/ProductDetail";
-import Footer from "./components/Footer";
 import ShippingAddressForm from "./pages/ShippingAddressForm";
 import CheckoutPage from "./pages/CheckoutPage";
 import OrdersPage from "./pages/OrdersPage";
@@ -25,6 +25,20 @@ import Users from "./pages/admin/Users";
 import Products from "./pages/admin/Products";
 import UserDetail from "./pages/admin/UserDetail";
 import SearchResults from "./pages/SearchResults";
+import NotFound from "./pages/NotFound";
+import React from "react";
+
+// ScrollToTop Component
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  // Scroll to top whenever the pathname changes
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 function AppContent() {
   const location = useLocation();
@@ -36,6 +50,7 @@ function AppContent() {
 
   return (
     <>
+      <ScrollToTop />
       {!hideHeader && <Header />}
 
       <Routes>
