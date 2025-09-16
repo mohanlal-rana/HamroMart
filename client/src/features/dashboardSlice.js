@@ -1,13 +1,14 @@
 // src/features/dashboardSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+   const API_URL = import.meta.env.VITE_API_URL;
 // ✅ Fetch Dashboard Stats
 export const fetchDashboardStats = createAsyncThunk(
   "dashboard/fetchStats",
   async (_, { rejectWithValue }) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:5000/api/dashboard/stats", {
+      const response = await fetch(`${API_URL}/api/dashboard/stats`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -31,7 +32,7 @@ export const fetchRecentOrders = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:5000/api/dashboard/recent-orders", {
+      const response = await fetch(`${API_URL}/api/dashboard/recent-orders`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
