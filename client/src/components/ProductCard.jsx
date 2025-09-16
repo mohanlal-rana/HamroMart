@@ -26,10 +26,10 @@ export default function ProductCard({ product }) {
   };
 
   return (
-    <div
-      onClick={handleNavigate}
-      className="bg-white shadow-lg rounded-xl w-40 sm:w-48 md:w-64 flex flex-col overflow-hidden relative cursor-pointer hover:shadow-xl transition"
-    >
+<div
+  onClick={handleNavigate}
+  className="bg-white shadow-lg rounded-xl w-full max-w-[150px] sm:w-48 md:w-64 flex flex-col overflow-hidden relative cursor-pointer hover:shadow-xl transition"
+>
       {/* Image */}
       {product.images && product.images.length > 0 && (
         <img
