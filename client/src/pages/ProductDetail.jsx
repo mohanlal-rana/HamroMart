@@ -188,7 +188,7 @@ export default function ProductDetail() {
           </div>
 
           {/* Delivery Options */}
-          <div className="p-4 border rounded-lg space-y-2">
+{      user &&    <div className="p-4 border rounded-lg space-y-2">
             <h3 className="font-semibold flex items-center gap-2 text-lg">
               <FiTruck className="text-blue-600" /> Delivery Options
             </h3>
@@ -230,7 +230,7 @@ export default function ProductDetail() {
               <FiDollarSign className="text-blue-500" />
               <p className="font-medium text-sm">Cash on Delivery Available</p>
             </div>
-          </div>
+          </div>}
 
           {/* Product Features */}
           <div className="mt-6">
