@@ -188,12 +188,12 @@ export default function ProductDetail() {
           </div>
 
           {/* Delivery Options */}
-{      user &&    <div className="p-4 border rounded-lg space-y-2">
+   <div className="p-4 border rounded-lg space-y-2">
             <h3 className="font-semibold flex items-center gap-2 text-lg">
               <FiTruck className="text-blue-600" /> Delivery Options
             </h3>
             
-            <div className="flex justify-between items-center">
+{user &&(            <div className="flex justify-between items-center">
               <div className="flex items-center gap-2">
                 <FiMapPin className="text-red-500" />
                 {shippingLoading ? (
@@ -214,7 +214,7 @@ export default function ProductDetail() {
               >
                 {shippingAddress ? "Change" : "Add"}
               </button>
-            </div>
+            </div>)}
 
             <div className="flex items-center gap-2">
               <FiTruck className="text-green-600" />
@@ -230,7 +230,7 @@ export default function ProductDetail() {
               <FiDollarSign className="text-blue-500" />
               <p className="font-medium text-sm">Cash on Delivery Available</p>
             </div>
-          </div>}
+          </div>
 
           {/* Product Features */}
           <div className="mt-6">
